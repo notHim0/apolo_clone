@@ -32,7 +32,9 @@ const HomePage: React.FC = () => {
       try {
         const params = new URLSearchParams(filters).toString();
         console.log(params);
-        const res = await fetch(`http://localhost:4000/api/doctors?${params}`);
+        const res = await fetch(
+          `https://apolo-clone.onrender.com/api/doctors?${params}`
+        );
         console.log(res);
         const data = await res.json();
 
