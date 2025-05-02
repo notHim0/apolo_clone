@@ -40,4 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-server
+
+frontend/package-lock.json
+frontend/README.node_modules
+frontend/node_modules
+frontend/.next
+
+backend/server/node_modules
+backend/server/env
+backend/server/README.md
+backend/server/package-lock.json

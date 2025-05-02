@@ -9,16 +9,12 @@ interface FilterSidebarProps {
 export default function FilterSidebar({
   onFilterChange,
 }: FilterSidebarProps): React.ReactElement {
-  const [modeOfConsult, setModeOfConsult] = useState({
-    hospital: true,
-    online: true,
-  });
+  const [modeOfConsult, setModeOfConsult] = useState<string[]>([]);
   const [experience, setExperience] = useState<string[]>([]);
   const [fees, setFees] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
   const [experienceExpanded, setExperienceExpanded] = useState(false);
   const [languageExpanded, setLanguageExpanded] = useState(false);
-  const [facility, setFacility] = useState(["Apollo", "Clinic"]);
 
   const handleToggle = (
     value: string,
@@ -29,12 +25,12 @@ export default function FilterSidebar({
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
   };
-  const handleModeOfConsult = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    console.log(name, checked);
+  // const handleModeOfConsult = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, checked } = e.target;
+  //   console.log(name, checked);
 
-    setModeOfConsult((prev) => ({ ...prev, [name]: checked }));
-  };
+  //   setModeOfConsult((prev) => ({ ...prev, [name]: checked }));
+  // };
 
   useEffect(() => {
     const filters = {
@@ -42,10 +38,9 @@ export default function FilterSidebar({
       fees,
       languages,
       modeOfConsult,
-      facility,
     };
     onFilterChange?.(filters);
-  }, [experience, fees, languages, modeOfConsult, facility]);
+  }, [experience, fees, languages, modeOfConsult]);
 
   return (
     <aside className="w-9/12 max-w-xs border-r border-gray-300 m-3 p-1 space-y-6 text-sm">
@@ -62,21 +57,25 @@ export default function FilterSidebar({
       <div>
         <h3 className="font-semibold mb-2">Mode of Consult</h3>
         <div className="space-y-2">
-          <label className="flex items-center space-x-2">
+          <label className="flex items-center space-x-2" key="hospital">
             <input
               type="checkbox"
               name="hospital"
-              checked={modeOfConsult.hospital}
-              onChange={handleModeOfConsult}
+              checked={modeOfConsult.includes("hospital")}
+              onChange={() =>
+                handleToggle("hospital", modeOfConsult, setModeOfConsult)
+              }
             />
             <span>Hospital Visit</span>
           </label>
-          <label className="flex items-center space-x-2">
+          <label className="flex items-center space-x-2" key="online">
             <input
               type="checkbox"
               name="online"
-              checked={modeOfConsult.online}
-              onChange={handleModeOfConsult}
+              checked={modeOfConsult.includes("online")}
+              onChange={() =>
+                handleToggle("online", modeOfConsult, setModeOfConsult)
+              }
             />
             <span>Online Consult</span>
           </label>
