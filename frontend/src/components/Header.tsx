@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import Search from "./Search";
 import Login from "./Login";
 import { ChevronDown, LocationEdit } from "lucide-react";
+import Image from "next/image";
 
 export default function Header(): ReactElement {
   return (
@@ -10,7 +11,12 @@ export default function Header(): ReactElement {
       {/*------------------------------------------------- Top Section ----------------------------------------------------*/}
       <div className="max-w-[1200px] mx-auto flex items-center justify-between py-3 px-6">
         <div className="flex items-center space-x-6">
-          <img src="apollo247.svg" alt="Apollo247 Logo" className="w-[60px]" />
+          <Image
+            src="apollo247.svg"
+            alt="Apollo247 Logo"
+            width={60}
+            height={20}
+          />
 
           <div className="flex items-center">
             <LocationEdit className="mr-1" size={28} />

@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
 import FilterSidebar from "../components/FilterSidebar";
 import DoctorCard from "../components/DoctorCard";
 import Path from "@/components/Path";
@@ -20,6 +19,7 @@ interface Doctor {
 }
 
 const HomePage: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [filters, setFilters] = useState<Record<string, any>>({});
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(false);

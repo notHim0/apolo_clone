@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { ReactElement } from "react";
 
 interface DoctorCardProps {
@@ -28,7 +29,11 @@ export default function DoctorCard({
     <section className="flex items-center border border-gray-300 rounded-lg p-4">
       {/* Doctor Image */}
       <div className="flex justify-center px-5">
-        <img src={imageUrl} alt={name} className=" w-[74px] h-[74px] rounded" />
+        <Image
+          src={imageUrl}
+          alt={name}
+          className=" w-[74px] h-[74px] rounded"
+        />
       </div>
 
       {/* ---------------------------Doctor Info section------------------------------ */}

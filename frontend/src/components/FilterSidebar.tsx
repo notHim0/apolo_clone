@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface FilterSidebarProps {
-  onFilterChange?: (filters: Record<string, any>) => void;
+  onFilterChange?: (filters: Record<string, unknown>) => void;
 }
 
 export default function FilterSidebar({
@@ -16,21 +16,20 @@ export default function FilterSidebar({
   const [experienceExpanded, setExperienceExpanded] = useState(false);
   const [languageExpanded, setLanguageExpanded] = useState(false);
 
-  const handleToggle = (
-    value: string,
-    state: string[],
-    setState: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    setState((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  };
-  // const handleModeOfConsult = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, checked } = e.target;
-  //   console.log(name, checked);
-
-  //   setModeOfConsult((prev) => ({ ...prev, [name]: checked }));
-  // };
+  const handleToggle = useCallback(
+    (
+      value: string,
+      state: string[],
+      setState: React.Dispatch<React.SetStateAction<string[]>>
+    ) => {
+      setState((prev) =>
+        prev.includes(value)
+          ? prev.filter((v) => v !== value)
+          : [...prev, value]
+      );
+    },
+    []
+  );
 
   useEffect(() => {
     const filters = {
@@ -40,7 +39,7 @@ export default function FilterSidebar({
       modeOfConsult,
     };
     onFilterChange?.(filters);
-  }, [experience, fees, languages, modeOfConsult]);
+  }, [experience, fees, languages, modeOfConsult, onFilterChange]);
 
   return (
     <aside className="w-9/12 max-w-xs border-r border-gray-300 m-3 p-1 space-y-6 text-sm">
